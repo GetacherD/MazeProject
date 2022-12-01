@@ -20,3 +20,14 @@ each row exactly separated by single new line , no space after last character
 save the file as any thing ,any file extention you want.
 
 run  ./out path/to/map/file
+
+
+to move around
+
+ press UP/DOWN/LEFT/UP
+
+to rotate CounterClock wise
+ press a
+
+to rotate Clockwise
+ press d
