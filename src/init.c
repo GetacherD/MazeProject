@@ -12,10 +12,6 @@ int positionPlayer(App *app)
 
 	app->p.x = 1.5;
 	app->p.y = 1.5;
-	app->TL = 0;
-	app->TR = 0;
-	app->BL = 0;
-	app->BR = 0;
 	for (i = 0; i < app->map_size; i++)
 	{
 		for (j = 0; j < app->map_size; j++)

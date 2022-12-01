@@ -10,6 +10,7 @@ int main(int __attribute__((unused)) argc, char **argv)
 	App app;
 
 	init(&app, argv);
+	app.keys = SDL_GetKeyboardState(NULL);
 	initTexture(&app);
 	while (true)
 	{

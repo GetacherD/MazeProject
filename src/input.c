@@ -2,38 +2,29 @@
 
 /**
  * doKeyDown - handle key down event
- * @e: event struct
  * @app: common data struct
  */
-void doKeyDown(SDL_Event e, App *app)
+void doKeyDown(App *app)
 {
-	switch (e.key.keysym.sym)
+	if (app->keys[SDL_SCANCODE_DOWN])
+		keyD(app);
+	if (app->keys[SDL_SCANCODE_LEFT])
+		keyL(app);
+	if (app->keys[SDL_SCANCODE_RIGHT])
+		keyR(app);
+	if (app->keys[SDL_SCANCODE_UP])
+		keyU(app);
+	if (app->keys[SDL_SCANCODE_A])
 	{
-	case SDLK_a:
 		app->teta += 1;
 		if (app->teta > 360)
 			app->teta = app->teta - 360;
-		break;
-	case SDLK_d:
+	}
+	if (app->keys[SDL_SCANCODE_D])
+	{
 		app->teta -= 1;
 		if (app->teta < 0)
 			app->teta = app->teta + 360;
-		break;
-	case SDLK_DOWN:
-		keyD(app);
-		break;
-	case SDLK_UP:
-		keyU(app);
-		break;
-	case SDLK_LEFT:
-		keyL(app);
-		break;
-	case SDLK_RIGHT:
-		keyR(app);
-		break;
-
-	default:
-		break;
 	}
 }
 /**
@@ -51,11 +42,9 @@ void doInput(App *app)
 		case SDL_QUIT:
 			exit(0);
 			break;
-		case SDL_KEYDOWN:
-			doKeyDown(e, app);
-			break;
 		default:
 			break;
 		}
+		doKeyDown(app);
 	}
 }

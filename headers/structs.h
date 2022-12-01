@@ -1,6 +1,6 @@
 #ifndef _STRUCTS_
 #define _STRUCTS_
-
+#include <SDL2/SDL.h>
 /**
  * struct Map - map of game
  * @size: size of map
@@ -37,11 +37,13 @@ typedef struct Point
  * @down: move down ? 1 else 0
  * @map: game map
  * @map_size: game map size
+ * @keys: keyboards state array
  */
 typedef struct App
 {
 	SDL_Renderer *ren;
 	SDL_Window *win;
+	const Uint8* keys;
 	SDL_Texture *ceil;
 	SDL_Texture *floor;
 	SDL_Texture *wallV;

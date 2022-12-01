@@ -13,6 +13,7 @@ SideLen len1(Point p, double teta, int **map, int size)
 
 	double dx, dy, Dx, Dy, rx, ry, Rx, Ry, R, r, x, y;
 	SideLen ray;
+	int count = 0;
 
 	x = p.x;
 	y = p.y;
@@ -34,6 +35,15 @@ SideLen len1(Point p, double teta, int **map, int size)
 	r = min(rx, ry);
 	while (r <= R)
 	{
+		count++;
+		if (count > 2 * size)
+		{
+			ray.len = min(Rx, Ry);
+			ray.face = 1;
+			if (Ry < Rx)
+				ray.face = 0;
+			return (ray);
+		}
 		if (rx == ry)
 		{
 			x = x + dx;
@@ -94,6 +104,7 @@ SideLen len2(Point p, double teta, int **map, int __attribute__((unused)) size)
 
 	double dx, dy, Dx, Dy, rx, ry, Rx, Ry, R, r, x, y;
 	SideLen ray;
+	int count = 0;
 
 	x = p.x;
 	y = p.y;
@@ -115,6 +126,15 @@ SideLen len2(Point p, double teta, int **map, int __attribute__((unused)) size)
 	r = min(rx, ry);
 	while (r <= R)
 	{
+		count++;
+		if (count > 2 * size)
+		{
+			ray.len = min(Rx, Ry);
+			ray.face = 1;
+			if (Ry < Rx)
+				ray.face = 0;
+			return (ray);
+		}
 		if (rx == ry)
 		{
 			x = x - dx;
@@ -175,6 +195,7 @@ SideLen len3(Point p, double teta, int **map, int size)
 
 	double dx, dy, Dx, Dy, rx, ry, Rx, Ry, R, r, x, y;
 	SideLen ray;
+	int count = 0;
 
 	x = p.x;
 	y = p.y;
@@ -196,6 +217,15 @@ SideLen len3(Point p, double teta, int **map, int size)
 	r = min(rx, ry);
 	while (r <= R)
 	{
+		count++;
+		if (count > 2 * size)
+		{
+			ray.len = min(Rx, Ry);
+			ray.face = 1;
+			if (Ry < Rx)
+				ray.face = 0;
+			return (ray);
+		}
 		if (rx == ry)
 		{
 			x = x - dx;
@@ -256,6 +286,7 @@ SideLen len4(Point p, double teta, int **map, int size)
 
 	double dx, dy, Dx, Dy, rx, ry, Rx, Ry, R, r, x, y;
 	SideLen ray;
+	int count = 0;
 
 	x = p.x;
 	y = p.y;
@@ -277,6 +308,15 @@ SideLen len4(Point p, double teta, int **map, int size)
 	r = min(rx, ry);
 	while (r <= R)
 	{
+		count++;
+		if (count > 2 * size)
+		{
+			ray.len = min(Rx, Ry);
+			ray.face = 1;
+			if (Ry < Rx)
+				ray.face = 0;
+			return (ray);
+		}
 		if (rx == ry)
 		{
 			x = x + dx;
