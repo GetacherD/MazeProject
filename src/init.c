@@ -45,9 +45,15 @@ void init(App *app, char **argv)
 				    SDL_WINDOWPOS_CENTERED,
 				    SCW, SCH,
 				    SDL_WINDOW_SHOWN);
+	if (app->win == NULL)
+		safeExit(app);
 	app->ren = SDL_CreateRenderer(app->win, -1, SDL_RENDERER_ACCELERATED);
+	if (app->ren == NULL)
+		safeExit(app);
 	m = loadMap(argv[1]);
 	app->map = m.map;
+	if (app->map == NULL)
+		safeExit(app);
 	app->map_size = m.size;
 	app->up = 0;
 	app->left = 0;
@@ -70,6 +76,8 @@ void initTexture(App *app)
 
 	wv = IMG_Load("img/wallv.jpg");
 	wh = IMG_Load("img/wallh.jpg");
+	if (wh == NULL || wv == NULL)
+		safeExit(app);
 	app->floor = SDL_CreateTexture(app->ren,
 				       SDL_PIXELFORMAT_RGBA8888,
 				       SDL_TEXTUREACCESS_TARGET, SCW, SCH / 2);
@@ -99,4 +107,54 @@ void initTexture(App *app)
 	SDL_SetRenderTarget(app->ren, NULL);
 	SDL_FreeSurface(wv);
 	SDL_FreeSurface(wh);
+	if (app->ceil == NULL || app->floor == NULL ||
+	    app->wallV == NULL || app->wallH == NULL)
+		safeExit(app);
+}
+/**
+ * safeExit - exit app if any thing wrong happen safely
+ * @app: common data struct
+ */
+void safeExit(App *app)
+{
+	if (app->ceil)
+		SDL_DestroyTexture(app->ceil);
+	if (app->floor)
+		SDL_DestroyTexture(app->floor);
+	if (app->wallV)
+		SDL_DestroyTexture(app->wallV);
+	if (app->wallH)
+		SDL_DestroyTexture(app->wallH);
+	if (app->ren)
+		SDL_DestroyRenderer(app->ren);
+	if (app->win)
+		SDL_DestroyWindow(app->win);
+	if (app->map)
+		free_map(app->map, app->map_size);
+	SDL_Quit();
+	printf("Error Occur: %s\nUsage: ./prog mapfile", SDL_GetError());
+	exit(42);
+}
+/**
+ * quit - exit app after end of successfull game loop
+ * @app: common data struct
+ */
+void quit(App *app)
+{
+	if (app->ceil)
+		SDL_DestroyTexture(app->ceil);
+	if (app->floor)
+		SDL_DestroyTexture(app->floor);
+	if (app->wallV)
+		SDL_DestroyTexture(app->wallV);
+	if (app->wallH)
+		SDL_DestroyTexture(app->wallH);
+	if (app->ren)
+		SDL_DestroyRenderer(app->ren);
+	if (app->win)
+		SDL_DestroyWindow(app->win);
+	if (app->map)
+		free_map(app->map, app->map_size);
+	SDL_Quit();
+	exit(0);
 }

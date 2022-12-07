@@ -22,5 +22,6 @@ int main(int __attribute__((unused)) argc, char **argv)
 		SDL_RenderPresent(app.ren);
 		SDL_Delay(16);
 	}
+	quit(&app);
 	return (0);
 }
