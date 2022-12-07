@@ -26,6 +26,8 @@ void doKeyDown(App *app)
 		if (app->teta < 0)
 			app->teta = app->teta + 360;
 	}
+	if (app->keys[SDL_SCANCODE_F])
+		app->fired = 1;
 }
 /**
  * doInput - process all inputs

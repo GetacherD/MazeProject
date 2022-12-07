@@ -59,6 +59,7 @@ void init(App *app, char **argv)
 	app->left = 0;
 	app->right = 0.1;
 	app->down = 0;
+	app->fired = 0;
 	if (!positionPlayer(app))
 	{
 		printf("Un able to place player on map\n");
@@ -66,18 +67,16 @@ void init(App *app, char **argv)
 	}
 }
 /**
- * initTexture - initialize required textures
+ * initTexture - initialize required textures for wall & floor
  * @app: common data struct
  */
 void initTexture(App *app)
 {
-	SDL_Texture *wvtmp, *whtmp;
+	SDL_Texture *wvtmp, *whtmp, *enemy;
 	SDL_Surface *wv, *wh;
 
 	wv = IMG_Load("img/wallv.jpg");
 	wh = IMG_Load("img/wallh.jpg");
-	if (wh == NULL || wv == NULL)
-		safeExit(app);
 	app->floor = SDL_CreateTexture(app->ren,
 				       SDL_PIXELFORMAT_RGBA8888,
 				       SDL_TEXTUREACCESS_TARGET, SCW, SCH / 2);
@@ -107,10 +106,33 @@ void initTexture(App *app)
 	SDL_SetRenderTarget(app->ren, NULL);
 	SDL_FreeSurface(wv);
 	SDL_FreeSurface(wh);
-	if (app->ceil == NULL || app->floor == NULL ||
-	    app->wallV == NULL || app->wallH == NULL)
+	if (app->ceil == NULL || app->floor == NULL || app->wallV == NULL ||
+	    app->wallH == NULL)
 		safeExit(app);
 }
+/**
+ * initPlayers - initialize required textures for player and enemy
+ * @app: common data struct
+ */
+void initPlayers(App *app)
+{
+	SDL_Surface *pl, *en, *fr;
+
+	pl = IMG_Load("img/player.gif");
+	en = IMG_Load("img/enemy.gif");
+	fr = IMG_Load("img/explode.png");
+	SDL_SetColorKey(pl, SDL_TRUE, SDL_MapRGB(pl->format, 220, 88, 220));
+	app->player = SDL_CreateTextureFromSurface(app->ren, pl);
+	SDL_SetColorKey(en, SDL_TRUE, SDL_MapRGB(en->format, 152, 0, 136));
+	app->enemy = SDL_CreateTextureFromSurface(app->ren, en);
+	SDL_SetSurfaceBlendMode(fr, SDL_BLENDMODE_MOD);
+	app->fire = SDL_CreateTextureFromSurface(app->ren, fr);
+	SDL_FreeSurface(pl);
+	SDL_FreeSurface(en);
+	if (app->player == NULL || app->enemy == NULL)
+		safeExit(app);
+}
+
 /**
  * safeExit - exit app if any thing wrong happen safely
  * @app: common data struct
@@ -133,28 +155,5 @@ void safeExit(App *app)
 		free_map(app->map, app->map_size);
 	SDL_Quit();
 	printf("Error Occur: %s\nUsage: ./prog mapfile", SDL_GetError());
-	exit(42);
-}
-/**
- * quit - exit app after end of successfull game loop
- * @app: common data struct
- */
-void quit(App *app)
-{
-	if (app->ceil)
-		SDL_DestroyTexture(app->ceil);
-	if (app->floor)
-		SDL_DestroyTexture(app->floor);
-	if (app->wallV)
-		SDL_DestroyTexture(app->wallV);
-	if (app->wallH)
-		SDL_DestroyTexture(app->wallH);
-	if (app->ren)
-		SDL_DestroyRenderer(app->ren);
-	if (app->win)
-		SDL_DestroyWindow(app->win);
-	if (app->map)
-		free_map(app->map, app->map_size);
-	SDL_Quit();
 	exit(0);
 }

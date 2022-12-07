@@ -12,6 +12,7 @@ int main(int __attribute__((unused)) argc, char **argv)
 	init(&app, argv);
 	app.keys = SDL_GetKeyboardState(NULL);
 	initTexture(&app);
+	initPlayers(&app);
 	while (true)
 	{
 		doInput(&app);
@@ -19,9 +20,10 @@ int main(int __attribute__((unused)) argc, char **argv)
 		drawWall(&app);
 		drawMap(&app);
 		drawRay(&app);
+		drawPlayer(&app);
 		SDL_RenderPresent(app.ren);
 		SDL_Delay(16);
 	}
-	quit(&app);
+	safeExit(&app);
 	return (0);
 }

@@ -74,3 +74,38 @@ void drawFloorCeil(App *app)
 	SDL_RenderCopy(app->ren, app->floor, NULL, &rFloor);
 	SDL_RenderCopy(app->ren, app->ceil, NULL, &rCeil);
 }
+/**
+ * drawPlayer - draw player and enemy
+ * @app: common data struct
+ */
+void drawPlayer(App *app)
+{
+
+	SDL_Rect psrc, pdest;
+	SDL_Rect esrc, edest;
+
+	psrc.x = 0;
+	psrc.y = esrc.y =  0;
+	SDL_QueryTexture(app->player, NULL, NULL, &psrc.w, &psrc.h);
+	pdest.x = SCW * app->p.x / app->map_size;
+	pdest.y = SCH - psrc.h;
+	pdest.w = psrc.w;
+	pdest.h = psrc.h;
+	SDL_RenderCopy(app->ren, app->player, &psrc, &pdest);
+	SDL_QueryTexture(app->enemy, NULL, NULL, &esrc.w, &esrc.h);
+	edest.w = esrc.w = 3 * esrc.w / 4;
+	edest.h = esrc.h = esrc.h / 2;
+	edest.x = SCW / 2;
+	esrc.x = esrc.w;
+	edest.y = SCH / 2;
+	if ((int)app->p.y % 3 == 1)
+	{
+		if (!app->fired)
+			SDL_RenderCopy(app->ren, app->enemy, &esrc, &edest);
+		if (app->fired)
+			SDL_RenderCopy(app->ren, app->fire, NULL, &edest);
+	}
+	else
+		app->fired = 0;
+
+}

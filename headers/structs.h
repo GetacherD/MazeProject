@@ -29,7 +29,11 @@ typedef struct Point
  * @floor: game area floor texture
  * @wallV: vertical wall texture
  * @wallH: horizontal wall texture
+ * @player: player texture
  * @teta: player view angle
+ * @enemy: enemy tetxture
+ * @fire: fired tetxture
+ * @fired: is bullet fired ?
  * @p: player location
  * @left: move left?1 else 0
  * @right: move right? 1 else 0
@@ -43,14 +47,18 @@ typedef struct App
 {
 	SDL_Renderer *ren;
 	SDL_Window *win;
-	const Uint8* keys;
+	const Uint8 *keys;
 	SDL_Texture *ceil;
 	SDL_Texture *floor;
 	SDL_Texture *wallV;
 	SDL_Texture *wallH;
+	SDL_Texture *player;
+	SDL_Texture *enemy;
+	SDL_Texture *fire;
 	double teta;
 	Point p;
 	int **map;
+	int fired;
 	int map_size;
 	double up;
 	double down;
