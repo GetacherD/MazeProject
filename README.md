@@ -18,7 +18,7 @@ Maze is a **SDL 3D Game**, done as final project for alx foundation course
 
 
 [Getting started](#getting-started) •
-[Installation](#installation) •
+
 [Configuration](#configuration) •
 
 
@@ -26,12 +26,12 @@ Maze is a **SDL 3D Game**, done as final project for alx foundation course
 
 ## Getting started
 
-![Tutorial][tutorial]
 
 To install/run  Maze
 
-1 Add SDL_image  to your img folder at same level as src and header
-2  run this command in your command prompt:
+Add SDL_image  to your img folder at same level as src and header
+
+run this command in your command prompt:
 
 ```sh
 gcc src/*.c -lSDL2 -Limg/SDL_img -Iimg/SDL_img -lSDL_image -lm -o out # compile
@@ -60,10 +60,15 @@ no space after new  line
 it must be square in size
 
 1 1 1 1 1 1
+
 1 0 0 1 0 1
+
 1 0 0 0 1 1
+
 1 1 0 0 1 1
+
 1 0 0 1 0 1
+
 1 1 1 1 1 1
 
 
