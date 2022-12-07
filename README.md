@@ -1,33 +1,70 @@
-# MazeProject
-This Project done as final project for alx foundation course completion.
+<!-- markdownlint-configure-file {
+  "MD013": {
+    "code_blocks": false,
+    "tables": false
+  },
+  "MD033": false,
+  "MD041": false
+} -->
 
-to run program
+<div align="center">
 
-gcc src/*.c -Wall -Werror -Wextra -pedantic -lSDL2 -L/path/to/SDL_image -I/path/to/SDL_image -lSDL2_image -lm -o out
+# Maze
 
-prepare map file as follows
+
+
+Maze is a **SDL 3D Game**, done as final project for alx foundation course
+
+
+
+[Getting started](#getting-started) •
+[Installation](#installation) •
+[Configuration](#configuration) •
+
+
+</div>
+
+## Getting started
+
+![Tutorial][tutorial]
+
+To install/run  Maze
+
+1 Add SDL_image  to your img folder at same level as src and header
+2  run this command in your command prompt:
+
+```sh
+gcc src/*.c -lSDL2 -Limg/SDL_img -Iimg/SDL_img -lSDL_image -lm -o out # compile
+./out map.data # run the program
+
+```
+
+
+
+
+> **Note**
+> Maze only runs in SDL2*
+
+
+
+## Configuration
+
+### map file
+
+When calling `./output mapfile`
+
+mapfile must be file that contain 0 for no wall and 1 for wall
+each 0 and 1 must be separated by exactly 1 space and exactly one new line
+no space after new  line
+
+it must be square in size
 
 1 1 1 1 1 1
 1 0 0 1 0 1
-1 0 1 0 0 1
+1 0 0 0 1 1
+1 1 0 0 1 1
 1 0 0 1 0 1
-1 0 0 0 0 1
 1 1 1 1 1 1
 
-1 for wall 0 for nothing and each only separated by single space
-each row exactly separated by single new line , no space after last character
 
-save the file as any thing ,any file extention you want.
-
-run  ./out path/to/map/file
-
-
-to move around
-
- press UP/DOWN/LEFT/UP
-
-to rotate CounterClock wise
- press a
-
-to rotate Clockwise
- press d
+[src]: https://github.com/GetacherD/MazeProject
