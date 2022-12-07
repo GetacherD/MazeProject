@@ -153,6 +153,12 @@ void safeExit(App *app)
 		SDL_DestroyWindow(app->win);
 	if (app->map)
 		free_map(app->map, app->map_size);
+	if (app->fire)
+		SDL_Destroy(app->fire);
+	if (app->player)
+		SDL_Destroy(app->player);
+	if (app->enemy)
+		SDL_Destroy(app->enemy)
 	SDL_Quit();
 	printf("Error Occur: %s\nUsage: ./prog mapfile", SDL_GetError());
 	exit(0);
