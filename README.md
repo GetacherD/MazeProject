@@ -20,6 +20,7 @@ Maze is a **SDL 3D Game**, done as final project for alx foundation course
 [Getting started](#getting-started) •
 
 [Configuration](#configuration) •
+[How to Play](#key Bindings) •
 
 
 </div>
@@ -71,5 +72,12 @@ it must be square in size
 
 1 1 1 1 1 1
 
+## Key Bindings
+
+### Game rules
+press a to rotate ccw
+press d to rotate cw
+press up/down/left/right to move up/down/left/right
+press f to fire
 
 [src]: https://github.com/GetacherD/MazeProject
