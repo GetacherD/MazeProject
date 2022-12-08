@@ -1,3 +1,4 @@
+
 #ifndef _PROTO_
 #define _PROTO_
 void safeExit(App *app);
@@ -10,7 +11,7 @@ double min(double x, double y);
 void doInput(App *app);
 void init(App *app, char **argv);
 void drawWall(App *app);
-void initTexture(App *app);
+void initTexture(App *app, char **);
 void initPlayers(App *app);
 int  positionPlayer(App *app);
 void drawRay(App *app);

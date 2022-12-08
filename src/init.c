@@ -69,20 +69,17 @@ void init(App *app, char **argv)
 /**
  * initTexture - initialize required textures for wall & floor
  * @app: common data struct
+ * @env: environmental variable holding paths for vert & horiz walls
  */
-void initTexture(App *app)
+void initTexture(App *app, char **env)
 {
 	SDL_Texture *wvtmp, *whtmp, *enemy;
-	SDL_Surface *wv, *wh;
+	SDL_Surface *wv, *wh, *floor, *ceil;
 
-	wv = IMG_Load("img/wallv.jpg");
-	wh = IMG_Load("img/wallh.jpg");
-	app->floor = SDL_CreateTexture(app->ren,
-				       SDL_PIXELFORMAT_RGBA8888,
-				       SDL_TEXTUREACCESS_TARGET, SCW, SCH / 2);
-	app->ceil = SDL_CreateTexture(app->ren,
-				      SDL_PIXELFORMAT_RGBA8888,
-				      SDL_TEXTUREACCESS_TARGET, SCW, SCH / 2);
+	wv = IMG_Load(env[0]);
+	wh = IMG_Load(env[1]);
+	floor = IMG_Load(env[2]);
+	ceil = IMG_Load(env[3]);
 	app->wallH = SDL_CreateTexture(app->ren,
 				       SDL_PIXELFORMAT_RGBA8888,
 				       SDL_TEXTUREACCESS_TARGET, SCW, SCH);
@@ -91,21 +88,19 @@ void initTexture(App *app)
 				       SDL_TEXTUREACCESS_TARGET, SCW, SCH);
 	wvtmp = SDL_CreateTextureFromSurface(app->ren, wv);
 	whtmp = SDL_CreateTextureFromSurface(app->ren, wh);
+	app->floor = SDL_CreateTextureFromSurface(app->ren, floor);
+	app->ceil = SDL_CreateTextureFromSurface(app->ren, ceil);
 	SDL_SetRenderTarget(app->ren, app->wallV);
 	SDL_RenderCopy(app->ren, wvtmp, NULL, NULL);
 	SDL_DestroyTexture(wvtmp);
 	SDL_SetRenderTarget(app->ren, app->wallH);
 	SDL_RenderCopy(app->ren, whtmp, NULL, NULL);
 	SDL_DestroyTexture(whtmp);
-	SDL_SetRenderTarget(app->ren, app->floor);
-	SDL_SetRenderDrawColor(app->ren, 0, 0, 200, 0);
-	SDL_RenderClear(app->ren);
-	SDL_SetRenderTarget(app->ren, app->ceil);
-	SDL_SetRenderDrawColor(app->ren, 200, 120, 25, 255);
-	SDL_RenderClear(app->ren);
 	SDL_SetRenderTarget(app->ren, NULL);
 	SDL_FreeSurface(wv);
 	SDL_FreeSurface(wh);
+	SDL_FreeSurface(floor);
+	SDL_FreeSurface(ceil);
 	if (app->ceil == NULL || app->floor == NULL || app->wallV == NULL ||
 	    app->wallH == NULL)
 		safeExit(app);
@@ -116,7 +111,7 @@ void initTexture(App *app)
  */
 void initPlayers(App *app)
 {
-	SDL_Surface *pl, *en, *fr;
+	SDL_Surface *pl, *en, *fr; /* player, enemy, fire/explode */
 
 	pl = IMG_Load("img/player.gif");
 	en = IMG_Load("img/enemy.gif");
@@ -154,11 +149,11 @@ void safeExit(App *app)
 	if (app->map)
 		free_map(app->map, app->map_size);
 	if (app->fire)
-		SDL_Destroy(app->fire);
+		SDL_DestroyTexture(app->fire);
 	if (app->player)
-		SDL_Destroy(app->player);
+		SDL_DestroyTexture(app->player);
 	if (app->enemy)
-		SDL_Destroy(app->enemy)
+		SDL_DestroyTexture(app->enemy);
 	SDL_Quit();
 	printf("Error Occur: %s\nUsage: ./prog mapfile", SDL_GetError());
 	exit(0);
