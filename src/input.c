@@ -28,6 +28,10 @@ void doKeyDown(App *app)
 	}
 	if (app->keys[SDL_SCANCODE_F])
 		app->fired = 1;
+	if (app->keys[SDL_SCANCODE_R])
+		app->rain = 1;
+	if (app->keys[SDL_SCANCODE_S])
+		app->rain = 0;
 }
 /**
  * doInput - process all inputs

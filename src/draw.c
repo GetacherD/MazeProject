@@ -109,3 +109,23 @@ void drawPlayer(App *app)
 		app->fired = 0;
 
 }
+/**
+ * rain - activate rain simulation
+ * @app: common data struct
+ */
+void rain(App *app)
+{
+	int i, j, k;
+
+	srand(time(NULL));
+	SDL_SetRenderDrawColor(app->ren, 255, 255, 255, 255);
+	for (i = 0; i < SCW; i += 10)
+	{
+		for (j = 0; j < SCH; j += 5)
+		{
+			k = rand();
+			if (k % 5 == 1)
+				SDL_RenderDrawLine(app->ren, i, j, i, j + 2);
+		}
+	}
+}

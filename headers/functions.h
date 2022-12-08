@@ -1,6 +1,7 @@
 
 #ifndef _PROTO_
 #define _PROTO_
+void rain(App *app);
 void safeExit(App *app);
 void quit(App *app);
 void drawFloorCeil(App *app);

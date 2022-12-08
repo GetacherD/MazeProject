@@ -27,6 +27,8 @@ int main(int __attribute__((unused)) argc, char **argv)
 		drawMap(&app);
 		drawRay(&app);
 		drawPlayer(&app);
+		if (app.rain)
+			rain(&app);
 		SDL_RenderPresent(app.ren);
 		SDL_Delay(16);
 	}

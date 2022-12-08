@@ -34,6 +34,7 @@ typedef struct Point
  * @enemy: enemy tetxture
  * @fire: fired tetxture
  * @fired: is bullet fired ?
+ * @rain: is rain active
  * @p: player location
  * @left: move left?1 else 0
  * @right: move right? 1 else 0
@@ -59,6 +60,7 @@ typedef struct App
 	Point p;
 	int **map;
 	int fired;
+	int rain;
 	int map_size;
 	double up;
 	double down;
