@@ -86,4 +86,6 @@ press up/down/left/right to move up/down/left/right
 
 press f to fire
 
+press r/s to rain/stop rain
+
 [src]: https://github.com/GetacherD/MazeProject
