@@ -36,6 +36,10 @@ Add SDL_image  to your img folder at same level as src and header
 run this command in your command prompt:
 
 ```sh
+export WALLV="path/to/verticall_wall_image"
+export WALLH="path/to/horizontal_wall_image"
+export FLOOR="path/to/floor_image"
+export CEIL="path/to/ceiling_image"
 gcc src/*.c -lSDL2 -Limg/SDL_img -Iimg/SDL_img -lSDL_image -lm -o out # compile
 ./out map.data # run the program
 
