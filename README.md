@@ -40,7 +40,7 @@ export WALLV="path/to/verticall_wall_image"
 export WALLH="path/to/horizontal_wall_image"
 export FLOOR="path/to/floor_image"
 export CEIL="path/to/ceiling_image"
-gcc src/*.c -lSDL2 -Limg/SDL_img -Iimg/SDL_img -lSDL_image -lm -o out # compile
+gcc src/*.c -lSDL2 -L/path/to/SDL_img -I/path/to/SDL_img -lSDL_image -lm -o out # compile
 ./out map.data # run the program
 
 ```
